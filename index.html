@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0c0e12">
+  <meta name="description" content="BOLT for Alexa+: simulated conversational authorization and evidence review with zero external actions.">
+  <title>BOLT for Alexa+ — Human control in every decision</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <div class="brand"><span class="mark">✳</span><span>BOLT <small>by Unfire</small></span></div>
+      <span class="topbadge"><span class="pulse"></span> Alexa+ experience <strong>simulation</strong></span>
+      <a class="github" href="https://github.com/ondmindmanagement-hub/bolt-alexa-hackathon" target="_blank" rel="noreferrer">Source code ↗</a>
+    </header>
+    <main>
+      <section class="hero">
+        <div class="eyebrow">BOUNDED AGENTS / HUMAN AUTHORIZATION / TRACEABLE EVIDENCE</div>
+        <h1>Let the assistant work.<br><em>Keep the final say.</em></h1>
+        <p class="lead">An interactive Alexa+ conversation <strong>simulation</strong> for exploring how a safe assistant can read information, prepare drafts and ask for a human decision before a consequential action.</p>
+      </section>
+      <div class="notice"><span aria-hidden="true">ⓘ</span><span><strong>No Amazon connection.</strong> All names, order information and responses are synthetic. There are no microphones, AI model requests, customer emails, payment operations or changes to external systems.</span></div>
+      <div class="layout">
+        <section class="workspace">
+          <div class="panel-head"><div><span class="eyebrow">01 / CONVERSATIONAL REVIEW</span><h2>Ask the assistant</h2></div><span class="statemarker"><span class="pulse"></span> Local simulation</span></div>
+          <div class="conversation">
+            <div class="voiceorb"><span class="voiceorb-core">✦</span><span class="voiceorb-ring"></span></div>
+            <p class="assistant-label">Alexa+ concept · simulated</p>
+            <p class="assistant-greeting">How can I help with order U-1042?</p>
+            <p class="hint">Select an example or enter a written request. The UI simulates a voice transcript; it does not record or transmit audio.</p>
+            <div class="suggestions" id="suggestions">
+              <button data-prompt="What happened to order U-1042?">Check shipment status <span>↗</span></button>
+              <button data-prompt="Summarize the delayed shipment for the team">Prepare a local summary <span>↗</span></button>
+              <button data-prompt="Send the customer a delay message">Request customer notification <span>↗</span></button>
+              <button data-prompt="Change the order priority to urgent">Request priority change <span>↗</span></button>
+              <button data-prompt="Delete the customer records">Try a blocked operation <span>↗</span></button>
+            </div>
+            <form id="promptForm" class="promptform">
+              <label for="prompt" class="sr-only">Simulated assistant request</label>
+              <input id="prompt" name="prompt" type="text" maxlength="600" placeholder="Enter a simulated voice request..." autocomplete="off" required>
+              <button type="submit" aria-label="Evaluate request">Evaluate <span>→</span></button>
+            </form>
+          </div>
+          <section class="outcome" aria-live="polite" id="outcome">
+            <div class="outcome-header"><span class="eyebrow">02 / POLICY RESULT</span><span id="decisionChip" class="chip idle">AWAITING REQUEST</span></div>
+            <h3 id="resultHeading">Nothing executed. Your decision comes first.</h3>
+            <p id="resultCopy">Submit a request to see how the policy evaluates the proposed action and what evidence supports the response.</p>
+            <div id="pendingApproval" class="approval hidden">
+              <div class="approval-title">Explicit human confirmation</div>
+              <p>Type <strong id="approvalPhrase"></strong> to rehearse approval. This creates a <em>simulated</em> receipt only.</p>
+              <label class="sr-only" for="approvalInput">Exact approval phrase</label>
+              <input type="text" id="approvalInput" autocomplete="off" placeholder="Type the exact approval phrase">
+              <div class="approval-actions"><button id="approveButton" type="button" class="approve">Confirm simulated approval</button><button id="rejectButton" type="button" class="reject">Reject</button></div>
+            </div>
+            <p id="feedback" class="feedback" role="status"></p>
+          </section>
+        </section>
+        <aside class="sidebar">
+          <section class="sidebar-card">
+            <div class="eyebrow">03 / EVIDENCE</div>
+            <h2>One order.<br>Three independent views.</h2>
+            <p class="aside-copy">The assistant does not declare which source is right. It preserves the differing snapshots for human assessment.</p>
+            <div id="sources" class="sources">
+              <div class="source"><div><strong>Order management</strong><small>OMS-DEMO-018</small></div><span>Shipped</span></div>
+              <div class="source"><div><strong>Carrier</strong><small>CARRIER-DEMO-142</small></div><span class="alerttext">Delayed</span></div>
+              <div class="source"><div><strong>Warehouse</strong><small>WMS-DEMO-307</small></div><span>Departed</span></div>
+            </div>
+            <div class="rules"><span>DATA</span><strong>Built-in synthetic fixtures</strong><span>OPERATIONS</span><strong>0 external calls</strong></div>
+          </section>
+          <section class="sidebar-card audit">
+            <div class="eyebrow">04 / LOCAL DECISION LOG</div>
+            <h2>Visible by design.</h2>
+            <div class="metrics"><div><span id="metricInteractions">0</span><small>Events</small></div><div><span id="metricApprovals">0</span><small>Approvals</small></div><div><span id="metricBlocked">0</span><small>Denied</small></div></div>
+            <div id="history" class="history"><p class="muted">No actions reviewed yet.</p></div>
+            <div class="audit-actions"><button type="button" id="exportButton">Export JSON ↓</button><button type="button" id="resetButton">Reset demo ↻</button></div>
+          </section>
+        </aside>
+      </div>
+      <section class="bottom"><div><span class="eyebrow">UNFIRE / BOLT</span><h2>Control isn't an afterthought.<br>It's the product.</h2></div><p>This is a contest-facing interaction prototype, not a claim of Alexa+ production integration, identity verification, cryptographically protected audit, or completed merchant workflow.</p></section>
+    </main>
+    <footer>Unfire · Independent founder-led prototype · 2026 <span>Amazon Developer Hackathon / Alexa+ simulated experience track</span></footer>
+  </div>
+  <script type="module" src="./src/web.js"></script>
+</body>
+</html>

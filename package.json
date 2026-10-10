@@ -1,10 +1,14 @@
 {
   "name": "bolt-alexa-hackathon",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": false,
   "type": "module",
   "scripts": {
-    "start": "node src/index.js",
-    "test": "node src/test.js"
+    "start": "node src/server.js",
+    "demo": "node src/index.js",
+    "test": "node --test src/simulator.test.js && node src/test.js"
+  },
+  "engines": {
+    "node": ">=20"
   }
 }
