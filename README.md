@@ -18,6 +18,14 @@ Requires Node.js 20+. No AWS account, SDK, API key, npm installation or network 
 
 The public GitHub Pages preview serves identical HTML/CSS/JS.
 
+## Public working demo and recorded evidence
+
+- Interactive web demo: https://ondmindmanagement-hub.github.io/bolt-alexa-hackathon/
+- Captioned 65-second MP4 of actual Chrome UI states: https://ondmindmanagement-hub.github.io/bolt-alexa-hackathon/demo/Unfire_BOLT_Alexa_Simulation_2026.mp4
+- Browser test audit JSON: https://ondmindmanagement-hub.github.io/bolt-alexa-hackathon/demo/browser-audit.json
+
+The MP4 is public on GitHub Pages, but the Amazon hackathon also asks for a public YouTube or Vimeo link on Devpost; the repo-hosted video by itself does not fulfill that form requirement. Voiceover is not included; neural speech synthesis was unavailable. Screens are captured from the real working prototype and captioned in English.
+
 ## Five complete demonstration flows
 
 1. Check shipment status — reads three bundled synthetic sources, notices their disagreement.
