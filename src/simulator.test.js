@@ -9,6 +9,24 @@ test("synthetic order read allowed",()=>{
  assert.equal(s.lastResult.sources.length,3);
  assert.equal(countByType(s).externalOperations,0);
 });
+test("wrong synthetic order ID fails closed rather than returning another order",()=>{
+ const s=submitUtterance(createSession(),"Where is order U-9999?");
+ assert.equal(s.lastResult.kind,"denied");
+ assert.equal(s.lastResult.sources.length,0);
+ assert.equal(s.pending,null);
+ assert.match(s.lastResult.detail,/Only the bundled fictional order/);
+});
+test("mixed-order query also fails closed even when matching fixture is present",()=>{
+ const s=submitUtterance(createSession(),"Compare U-1042 with U-9999 and notify customer");
+ assert.equal(s.lastResult.kind,"denied");
+ assert.equal(s.pending,null);
+ assert.equal(s.lastResult.sources.length,0);
+});
+test("correct fictional ID still returns the example and safe suggested actions",()=>{
+ const s=submitUtterance(createSession(),"Track u-1042 status");
+ assert.equal(s.lastResult.kind,"allowed");
+ assert.equal(s.lastResult.sources.length,3);
+});
 test("summary draft never sends",()=>{
  const s=submitUtterance(createSession(),"Summarize the delayed shipment");
  assert.equal(s.lastResult.kind,"allowed");

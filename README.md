@@ -55,16 +55,22 @@ All user-derived DOM text is escaped via textContent. No customer details are co
 - The interface accepts typed transcripts; it does not receive speech from an Amazon device.
 - All evidence records are invented fixtures and do not show business savings or customer error statistics.
 
+Read the [judge reproduction checklist and friction log](docs/JUDGING_AND_FRICTION_LOG.md) for verified steps, actual onboarding obstacles and remaining platform requirements.
+
 ## Honest product feedback for Amazon
 
 The simulated-experience option enabled a working, reproducible human-approval UX without a production Alexa+ preview. It allowed us to test status comparison, decision explanations and policy guardrails with zero secrets and zero running costs. For a real Alexa+ product we would need preview onboarding, verified conversational intent handling, real user identity, durable auditing, a safe action service and a legitimate customer/business problem. The simulation is the intended contest-facing prototype, not an integrated assistant.
 
 ## What changed after the original submission
 
-The original October 2026 repository included only a CLI policy stub and 3 simple tests. Version 0.2 adds the responsive public browser application, five example tasks, one-use in-memory human confirmations bound to request IDs, rejection and default-deny behavior, auditable evidence display, local JSON export, 15 dedicated simulator tests, and a small local server. No private macOS BOLT code is included.
+The original October 2026 repository included only a CLI policy stub and 3 simple tests. Version 0.2 adds the responsive public browser application, five example tasks, fail-closed rejection of unknown fictional order IDs, one-use in-memory human confirmations bound to request IDs, rejection and default-deny behavior, auditable evidence display, local JSON export, 15 dedicated simulator tests, and a small local server. No private macOS BOLT code is included.
 
 ## Boundaries
 
 This is an experimental human-interface demonstrator: it does not independently verify human identity, enforce policy outside the process, recognize arbitrary speech reliably, or control third-party services. Approval produces a simulated outcome only.
 
 Unfire · Omar Baró · hello@unfire.technology · https://unfire.technology
+
+## Additional safety regression (11 October 2026)
+
+Requests naming a different order ID (or mixing it with the demo order) now fail closed rather than accidentally presenting U-1042 fictional evidence as another order. This is a narrow local demo guardrail, not real entity authentication or a production authorization mechanism.

@@ -15,6 +15,11 @@ const reading=/\b(status|what happened|where is|track|check|show|explain|why|ord
 
 export function classifyUtterance(raw){
   if(typeof raw!=="string"||!raw.trim()||raw.length>600) return {type:"invalid",decision:"deny",reason:"Empty or oversized request."};
+  // Only one fictional order exists. Do not answer a different order request using U-1042 evidence.
+  const explicitOrderRefs=raw.match(/\bU-\d{2,}\b/gi)||[];
+  if(explicitOrderRefs.some(ref=>ref.toUpperCase()!==FIXTURE.orderId)){
+    return {type:"unknown_order",decision:"deny",reason:"Only the bundled fictional order U-1042 can be reviewed; no other order records are available."};
+  }
   if(dangerous.test(raw))return {type:"dangerous_operation",decision:"deny",reason:"Destructive, financial, or security-sensitive operation blocked."};
   if(sending.test(raw))return {type:"send_message",decision:"approval_required",reason:"A real outbound message would need an explicit human decision."};
   if(editing.test(raw))return {type:"change_setting",decision:"approval_required",reason:"Changing external records would need an explicit human decision."};
